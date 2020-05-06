@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.aaa.lee.springcloud</groupId>
+    <artifactId>20200427-springcloud-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>20200427-springcloud-consumer</module>
+        <module>20200427-springcloud-provider</module>
+        <module>20200427-springcloud-management</module>
+        <module>20200428-springcloud-eureka-management</module>
+        <module>20200429-springcloud-consumer-ribbon</module>
+        <module>20200429-springcloud-provider-8082</module>
+        <module>20200429-springcloud-provider-8083</module>
+        <module>20200504-springcloud-feign</module>
+        <module>20200504-springcloud-provider-hystrix</module>
+        <module>20200506-springcloud-config-server</module>
+        <module>20200506-springcloud-config-client</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <!--
+        dependencyManagement标签是什么含义？
+            只管理依赖，不做引入
+            按需加载
+    -->
+    <dependencyManagement>
+        <dependencies>
+            <!--
+                但是当直接去引入dependencies项目的时候，必须要使用dependency标签
+                因为dependencies项目中jar包太多了，自己项目中使用不了这么多jar包
+                不能直接引入
+
+                type标签其实在maven中标识了该jar包的类型，如果是jar和war则默认不用写
+                但是如果是pom，则必须要标明
+                标识项目所引入进来的是一个pom功能，而不是jar也不是war
+
+                scope生效时间:如果不指定，则所有引入的jar包的默认值都是profile
+                    profile:
+                        引入的jar包会在项目进行编译的时候生效
+                    runtime:
+                        只要项目一运行，引入的jar包就会立即生效(也比较常用)
+                    test:
+                        检测到项目中有@Test标签的时候就会生效
+                    import:
+                        谨慎使用，让该jar包只要一引入进来就会立即生效(多继承一般会用)
+            -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.2.6.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Hoxton.SR4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.47</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.1.20</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>2.1.1</version>
+            </dependency>
+            <!--
+                fastjson包
+            -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.10.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.62</version>
+            </dependency>
+
+            <!-- joda time begin -->
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>2.10.5</version>
+            </dependency>
+            <!-- joda time end -->
+
+            <!--
+                @Data
+                @Id
+                @Generate
+                @Table
+                是JPA的注解
+            -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.10</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>1.0.2</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+</project>
